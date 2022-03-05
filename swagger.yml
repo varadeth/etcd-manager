@@ -1,0 +1,48 @@
+consumes:
+  - application/json
+produces:
+  - application/json
+info:
+  description: ETCD-Manager
+  title: ETCD-Manager APIs
+  version: 1.0.0
+paths:
+  /connect:
+    post:
+      tags:
+        - connect
+      operationId: connect
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            $ref: '#/definitions/Connection'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Etcd Connection not established
+        '500':
+          description: Internal Server Error
+definitions:
+  Connection:
+    type: object
+    required:
+      - urls
+    properties:
+      urls: 
+        type: array
+        items:
+          type: string
+schemes:
+  - http
+swagger: "2.0"
+info:
+  version: '1.0.0'
+  title: 'Etcd Manager'
+host: localhost
+basePath: /v1
